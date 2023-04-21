@@ -1,9 +1,28 @@
 function hasTargetSum(array, target) {
-  // Write your algorithm here
+  //let use Hash table to keep track of numbers seen so far
+  //constant time O(1)
+  const seen = new Set(); 
+  // Iterate over each number in the array O(n)
+  for (let number of array) {
+    const complement = target - number; // Calculate the complement of the current number O(1)
+    // If the complement has been seen before, then we have found a pair that adds up to the target O(1)
+    if (seen.has(complement)) {
+      return true;
+    }
+    seen.add(number); // Add the current number to the hash table
+  }
+
+  // If we get here, then no pair was found
+  return false;
 }
 
 /* 
-  Write the Big O time complexity of your function here
+Line 4: O(1) - Creating a new set takes constant time.
+Line 6: O(n) - We iterate over each element of the array once.
+Line 7: O(1) - Subtracting two numbers takes constant time.
+Lines 9-13: O(1) on average - Checking if a set contains a value or adding a value to a set takes constant time on average, but in the worst case it can be O(n).
+Line 16: O(1) - Returning a boolean value takes constant time.
+the Big O notation will be O(4)+O(n), ignoring the constant, the total time complexity is O(n)
 */
 
 /* 
